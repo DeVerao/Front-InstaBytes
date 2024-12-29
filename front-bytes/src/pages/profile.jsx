@@ -96,7 +96,6 @@ const Profile = () => {
       ) : user ? (
         <div className="px-4 py-6">
           <ProfileHeader user={user} />
-          <PostGrid posts={user.posts} />
           <ProfileActionMenu onOpenModal={openModal} />
           <AddPostModal
             isOpen={isModalOpen}
@@ -106,6 +105,7 @@ const Profile = () => {
             newPost={newPost}
             setNewPost={setNewPost}
           />
+          <PostGrid posts={user.posts} />
         </div>
       ) : null}
     </div>
