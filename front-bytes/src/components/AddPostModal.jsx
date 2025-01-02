@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 
 const AddPostModal = ({ 
   isOpen, 
-  onClose, 
-  onSubmit, 
+  onClose,
   URL 
 }) => {
   const [newPost, setNewPost] = useState({
@@ -25,8 +24,6 @@ const AddPostModal = ({
       if (!response.ok) {
         throw new Error("Falha ao adicionar post");
       }
-
-      onSubmit(newPost);
       onClose();
     } catch (error) {
       console.error("Erro ao adicionar post:", error);
@@ -88,6 +85,7 @@ const AddPostModal = ({
             >
               Cancelar
             </button>
+
             <button
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"

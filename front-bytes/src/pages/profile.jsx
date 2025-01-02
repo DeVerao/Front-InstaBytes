@@ -9,10 +9,6 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPost, setNewPost] = useState({
-    imgUrl: "",
-    alt: "",
-  });
 
   const URL =
     "https://imersao-alura-backend-546094950816.southamerica-east1.run.app";
@@ -51,34 +47,6 @@ const Profile = () => {
     }
   }
 
-  const handleAddPost = async (e) => {
-    e.preventDefault();
-    try {
-      // Lógica para adicionar o post
-      // Por exemplo, fazer uma requisição para a API
-      const response = await fetch(`${URL}/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPost),
-      });
-
-      if (!response.ok) {
-        throw new Error("Falha ao adicionar post");
-      }
-
-      // Atualizar a lista de posts
-      await getUser();
-
-      // Fechar o modal após adicionar o post
-      closeModal();
-    } catch (error) {
-      console.error("Erro ao adicionar post:", error);
-      // Opcional: adicionar tratamento de erro para o usuário
-    }
-  };
-
   useEffect(() => {
     getUser();
   }, []);
@@ -100,12 +68,9 @@ const Profile = () => {
           <AddPostModal
             isOpen={isModalOpen}
             onClose={closeModal}
-            onSubmit={handleAddPost}
             URL={URL}
-            newPost={newPost}
-            setNewPost={setNewPost}
           />
-          <PostGrid posts={user.posts} />
+          <PostGrid posts={user.posts} URL={URL} />
         </div>
       ) : null}
     </div>

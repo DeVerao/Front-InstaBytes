@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostDetailModal = ({ post, onClose }) => {
+const PostDetailModal = ({ post, onClose, onDelete, onEdit }) => {
   if (!post) return null;
 
   return (
@@ -12,12 +12,28 @@ const PostDetailModal = ({ post, onClose }) => {
             alt={post.descricao || `Post ${post._id}`}
             className="w-full h-full object-cover"
           />
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 rounded-full bg-red-500 text-white px-3 py-1 hover:bg-red-600 transition-colors duration-300"
-          >
-            X
-          </button>
+          <div className="absolute top-4 right-4 flex space-x-2">
+            {" "}
+            {/* botões de edição exclusão e fechamento */}
+            <button
+              onClick={onDelete}
+              className="rounded-full bg-red-500 text-white px-3 py-1 hover:bg-red-600 transition-colors duration-300"
+            >
+              Delete
+            </button>
+            <button
+              onClick={onEdit}
+              className="rounded-full bg-blue-500 text-white px-3 py-1 hover:bg-blue-600 transition-colors duration-300"
+            >
+              Edit
+            </button>
+            <button
+              onClick={onClose}
+              className="rounded-full bg-red-500 text-white px-3 py-1 hover:bg-red-600 transition-colors duration-300"
+            >
+              X
+            </button>
+          </div>
         </div>
         <div className="p-4">
           <p className="text-gray-800">{post.descricao}</p>

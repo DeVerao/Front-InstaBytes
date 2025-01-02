@@ -1,8 +1,25 @@
 import React, { useState } from "react";
 import PostDetailModal from "./PostDetailModal";
 
-const PostGrid = ({ posts }) => {
+const PostGrid = ({ posts, URL }) => {
   const [selectedPost, setSelectedPost] = useState(null);
+
+  const deletePost = async (postId) => {
+    console.log(postId);
+    try {
+      const response = await fetch(`${URL}/delete/${postId._id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Falha ao deletar post");
+      }
+
+      setSelectedPost(null);
+    } catch (error) {
+      console.error("Erro ao deletar post:", error);
+    }
+  };
 
   return (
     <>
@@ -25,6 +42,8 @@ const PostGrid = ({ posts }) => {
         <PostDetailModal
           post={selectedPost}
           onClose={() => setSelectedPost(null)}
+          onDelete={() => deletePost(selectedPost)}
+          onEdit={"#"}
         />
       )}
     </>
